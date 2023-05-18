@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
     register,
     updateUser,
     loginWithProvider,
-    
+    logout,
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

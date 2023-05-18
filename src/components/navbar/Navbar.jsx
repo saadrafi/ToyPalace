@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
-  const { user} = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   return (
     <div className="navbar bg-base-100 my-4">
       <div className="w-full lg:w-[90%] mx-auto">
@@ -131,7 +131,7 @@ const Navbar = () => {
           {/* navEnd */}
           <div className="flex items-center gap-2">
             <div className=" md:h-11 md:w-11 h-6 tooltip" data-tip={user?.displayName}>
-              {user ? (
+              {user?.photoURL ? (
                 <img
                   src={user.photoURL}
                   alt=""
@@ -142,7 +142,9 @@ const Navbar = () => {
               )}
             </div>
             {user ? (
-              <Link  className="btn btn-primary">Log out</Link>
+              <Link onClick={logout} className="btn btn-primary">
+                Log out
+              </Link>
             ) : (
               <Link to="/login" className="btn btn-primary">
                 LogIn
