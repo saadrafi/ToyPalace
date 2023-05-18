@@ -4,10 +4,11 @@ import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { AuthContext } from "../../components/provider/AuthProvider";
 import { notifyError, notifyRequired } from "../../shared/alert";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useContext(AuthContext);
+  const { login, loginWithProvider } = useContext(AuthContext);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -29,6 +30,19 @@ const Login = () => {
       .catch((error) => {
         const errorMessage = error.message;
 
+        notifyError(errorMessage);
+      });
+  };
+
+  const googleProvider = new GoogleAuthProvider();
+
+  const handleGoogleLogin = () => {
+    loginWithProvider(googleProvider)
+      .then(() => {
+        console.log("Login with google");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
         notifyError(errorMessage);
       });
   };
@@ -96,7 +110,10 @@ const Login = () => {
 
             <div className="divider">OR</div>
           </form>
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex gap-2 justify-center items-center text-sm hover:scale-105 duration-300 text-primary ">
+          <button
+            onClick={handleGoogleLogin}
+            className="bg-white border py-2 w-full rounded-xl mt-5 flex gap-2 justify-center items-center text-sm hover:scale-105 duration-300 text-primary "
+          >
             <FaGoogle></FaGoogle>
             Login with Google
           </button>
