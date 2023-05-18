@@ -1,10 +1,54 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdAlternateEmail, MdPerson, MdImage } from "react-icons/md";
+import { AuthContext } from "../../components/provider/AuthProvider";
+import Swal from "sweetalert2";
+import { notifyError, notifyRequired } from "../../shared/alert";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { register, updateUser } = useContext(AuthContext);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const imgurl = form.imgurl.value;
+    const password = form.password.value;
+    if (name == "") {
+      notifyRequired("enter a name");
+      return;
+    } else if (email == "") {
+      notifyRequired("enter a email");
+      return;
+    } else if (password == "") {
+      notifyRequired("enter a password");
+      return;
+    } else if (password.length < 6) {
+      notifyRequired("password must be contain at least 6 character");
+      return;
+    }
+
+    register(email, password)
+      .then(() => {
+        updateUser(name, imgurl)
+          .then(() => {
+            console.log("User Updated");
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            notifyError(errorMessage);
+          });
+
+        form.reset();
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        notifyError(errorMessage);
+      });
+  };
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg">
@@ -14,7 +58,10 @@ const Register = () => {
           Sign Up to explore the best
         </p>
 
-        <form action="" className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+        <form
+          onSubmit={handleRegister}
+          className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+        >
           <p className="text-center text-lg font-medium">Sign Up to create account</p>
 
           <div>
