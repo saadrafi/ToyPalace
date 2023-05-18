@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/logo.png";
 import { FaUser } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
-import MobileNav from "./MobileNav";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+  const { user} = useContext(AuthContext);
   return (
     <div className="navbar bg-base-100 my-4">
       <div className="w-full lg:w-[90%] mx-auto">
         <div className="flex justify-between items-center w-full">
-            {/* navStart */}
+          {/* navStart */}
           <div>
             {/* Nav Dropdown */}
             <div className="dropdown md:hidden">
@@ -46,18 +47,22 @@ const Navbar = () => {
                   >
                     All Toy
                   </NavLink>
-                  <NavLink
-                    to="/mytoys"
-                    className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
-                  >
-                    My Toy
-                  </NavLink>
-                  <NavLink
-                    to="/addtoy"
-                    className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
-                  >
-                    Add a toy
-                  </NavLink>
+                  {user && (
+                    <>
+                      <NavLink
+                        to="/mytoys"
+                        className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
+                      >
+                        My Toy
+                      </NavLink>
+                      <NavLink
+                        to="/addtoy"
+                        className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
+                      >
+                        Add a toy
+                      </NavLink>
+                    </>
+                  )}
                   <NavLink
                     to="/blogs"
                     className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
@@ -70,15 +75,19 @@ const Navbar = () => {
 
             {/* LOGO lg */}
 
-            <Link className=" hidden md:contents">
-              <img src={logo} alt="" className=" h-16 w-40  rounded-lg" />
+            <Link className=" hidden md:flex items-center">
+              <img src={logo} alt="" className=" h-16  rounded-lg" />
+              <span className="text-2xl font-bold">Lego</span>
+              <span className="text-2xl font-extrabold text-primary">Palace</span>
             </Link>
           </div>
-            {/* navCenter */}
+          {/* navCenter */}
           <div>
             {/* Mobile LOGO */}
-            <Link className=" contents md:hidden">
+            <Link className=" flex items-center md:hidden">
               <img src={logo} alt="" className=" h-16  rounded-lg" />
+              <span className="text-2xl font-bold">Lego</span>
+              <span className="text-2xl font-extrabold text-primary">Palace</span>
             </Link>
 
             {/* Routes */}
@@ -95,34 +104,50 @@ const Navbar = () => {
               >
                 All Toy
               </NavLink>
-              <NavLink
-                to="/mytoys"
-                className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
-              >
-                My Toy
-              </NavLink>
-              <NavLink
-                to="/addtoy"
-                className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
-              >
-                Add a toy
-              </NavLink>
+              {user && (
+                <>
+                  <NavLink
+                    to="/mytoys"
+                    className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
+                  >
+                    My Toy
+                  </NavLink>
+                  <NavLink
+                    to="/addtoy"
+                    className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
+                  >
+                    Add a toy
+                  </NavLink>
+                </>
+              )}
               <NavLink
                 to="/blogs"
                 className={({ isActive }) => (isActive ? "btn btn-link" : "btn btn-ghost")}
               >
-                Blogs
+                Blog
               </NavLink>
             </div>
           </div>
-            {/* navEnd */}
+          {/* navEnd */}
           <div className="flex items-center gap-2">
-            <div className=" h-11 w-11">
-              <FaUser className="h-full w-full" />
+            <div className=" md:h-11 md:w-11 h-6 tooltip" data-tip={user?.displayName}>
+              {user ? (
+                <img
+                  src={user.photoURL}
+                  alt=""
+                  className="rounded-full h-full w-full object-cover"
+                />
+              ) : (
+                <FaUser className="h-full w-full" />
+              )}
             </div>
-            <Link to="/login" className="btn btn-primary">
-              LogIn
-            </Link>
+            {user ? (
+              <Link  className="btn btn-primary">Log out</Link>
+            ) : (
+              <Link to="/login" className="btn btn-primary">
+                LogIn
+              </Link>
+            )}
           </div>
         </div>
       </div>

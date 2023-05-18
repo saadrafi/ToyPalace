@@ -47,10 +47,12 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
   const authInfo = {
+    user,
     login,
     register,
     updateUser,
     loginWithProvider,
+    
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
