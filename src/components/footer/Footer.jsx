@@ -1,10 +1,12 @@
 import React from "react";
 import logo from "../../assets/logo.png";
+import { FaPhoneAlt, FaMapMarkedAlt } from "react-icons/fa";
+import { HiMail } from "react-icons/hi";
 
 const Footer = () => {
   return (
     <div>
-      <footer className="footer flex flex-col py-10 bg-base-200 text-base-content">
+      <footer className="flex flex-col py-10 bg-base-200 text-base-content">
         <footer className="footer w-[90%] mx-auto ">
           <div>
             <img src={logo} alt="" />
@@ -18,35 +20,39 @@ const Footer = () => {
           <div>
             <span className="footer-title">Address</span>
             <p>
-              <span className="font-semibold">Address:</span>
+              <span className="font-semibold">
+                <FaMapMarkedAlt></FaMapMarkedAlt>
+              </span>
               <span>House 1, Road 1, Block A, Mirpur 1, Dhaka 1216</span>
             </p>
             <p>
-              <span className="font-semibold">Address:</span>
+              <span className="font-semibold">
+                <FaMapMarkedAlt></FaMapMarkedAlt>
+              </span>
               <span>House 12, Road 4, Block c, Dhanmondi, Dhaka 1218</span>
             </p>
           </div>
           <div>
             <span className="footer-title">Contact Us</span>
-            <p>
-              <span className="font-semibold">Phone:</span>
+            <p className="flex items-center gap-1">
+              <FaPhoneAlt className="text-base"></FaPhoneAlt>
               <span>01700010001</span>
             </p>
-            <p>
-              <span className="font-semibold">Phone:</span>
+            <p className="flex items-center gap-1">
+              <FaPhoneAlt className="text-base"></FaPhoneAlt>
               <span>01700010001</span>
             </p>
-            <p>
-              <span className="font-semibold">Email:</span>
+            <p className="flex items-center gap-1">
+              <HiMail className="text-xl"></HiMail>
               <span>contact@legopalace.com</span>
             </p>
-            <p>
-              <span className="font-semibold">Email:</span>
+            <p className="flex items-center gap-1">
+              <HiMail className="text-xl"></HiMail>
               <span>contact@legopalace.com</span>
             </p>
           </div>
           <div>
-            <span className="footer-title">Social</span>
+            <span className="footer-title">Follow Us</span>
             <div className="grid grid-flow-col gap-4">
               <a>
                 <svg
@@ -84,7 +90,7 @@ const Footer = () => {
             </div>
           </div>
         </footer>
-        <p className="text-center w-full">Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+        <p className="text-center mt-10">Copyright © 2023 - All right reserved by LegoPlace Ltd</p>
       </footer>
     </div>
   );
