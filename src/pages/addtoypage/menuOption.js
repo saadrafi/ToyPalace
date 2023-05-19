@@ -1,4 +1,3 @@
-
 export const options = [
   { value: "city", label: "City" },
   { value: "classic", label: "Classic" },
@@ -8,6 +7,7 @@ export const options = [
   { value: "star wars", label: "Star Wars" },
   { value: "technic", label: "Technic" },
   { value: "ninjago", label: "Ninjago" },
+  { value: "disney", label: "Disney" },
   { value: "super mario", label: "Super Mario" },
   { value: "harry porter", label: "Harry Porter" },
   { value: "jurassic park", label: "Jurassic Park" },

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { notifyError, notifyRequired } from "../../shared/alert";
@@ -6,6 +6,13 @@ import { FaDollarSign } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { options } from "./menuOption";
 import { AuthContext } from "../../components/provider/AuthProvider";
+
+// https://i.ibb.co/nfLr4cC/60374-alt1.png fire truck
+// https://i.ibb.co/rbfkT7x/10696.jpg brick
+// https://i.ibb.co/qsKD3nq/76240-alt1.jpg batman
+// https://i.ibb.co/bdWxfd8/31205-alt1.png batman puzzel
+// https://i.ibb.co/R74g8zR/43217.png up house
+// https://i.ibb.co/1RYDx5p/40619-alt1.png walle
 
 const AddToy = () => {
   const [selectSubCategory, setSubCategory] = useState("");
@@ -72,10 +79,8 @@ const AddToy = () => {
             timer: 1500,
           });
           form.reset();
-          setSubCategory({
-            value: "",
-            label: "",
-          });
+
+          setSubCategory("");
         }
       })
       .catch((err) => {
@@ -124,6 +129,8 @@ const AddToy = () => {
             <label className="text-lg text-yellow-700">sub-category:</label>
 
             <CreatableSelect
+              isClearable
+              value={selectSubCategory}
               styles={{
                 control: (baseStyles, state) => ({
                   ...baseStyles,
@@ -139,7 +146,6 @@ const AddToy = () => {
                 }),
               }}
               options={options}
-              defaultValue={selectSubCategory}
               onChange={setSubCategory}
               placeholder="Select Sub Category"
               isSearchable
@@ -158,7 +164,6 @@ const AddToy = () => {
           <div className=" space-y-1">
             <label className="text-lg text-yellow-700">rating:</label>
             <input
-            
               type="number"
               step="0.1"
               name="rating"
