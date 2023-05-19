@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SingleMyToy = ({ toy, index }) => {
+const SingleMyToy = ({ toy, index, handleDelete }) => {
   const { _id, name, image, price, quantity, subCategory, description } = toy;
   return (
     <tr>
@@ -23,22 +23,25 @@ const SingleMyToy = ({ toy, index }) => {
       <td>${price}</td>
       <td>{quantity}</td>
       <td>{subCategory.toUpperCase()}</td>
-     
-        <td>
-            <div className="flex flex-col items-center">
-                <div className="text-sm text-gray-500">{description.slice(0,50)}</div>
-                <Link to={`/toy/${_id}`}>
-                    <button className="btn btn-link btn-xs">read more</button> 
-                </Link>
-                
-            </div>
-        </td>
-      
+
+      <td>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-gray-500">{description.slice(0, 50)}</div>
+          <Link to={`/toy/${_id}`}>
+            <button className="btn btn-link btn-xs">read more</button>
+          </Link>
+        </div>
+      </td>
+
       <th className=" space-x-2">
-        <Link>
+        <Link to={`/update/${_id}`}>
           <button className="btn btn-primary btn-xs">update</button>
         </Link>
-        <Link>
+        <Link
+          onClick={() => {
+            handleDelete(_id);
+          }}
+        >
           <button className="btn btn-error btn-xs">delete</button>
         </Link>
       </th>
