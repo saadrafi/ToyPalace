@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import SingleToyRow from "./SingleToyRow";
 import { useLoaderData } from "react-router-dom";
+import NoData from "../../shared/NoData";
 
 const AllToys = () => {
   const toyData = useLoaderData();
 
-  return (
+  return toyData?.length === 0 ? (
+    <NoData></NoData>
+  ) : (
     <div className="w-[90%] mx-auto my-8 font-serif">
       <h1 className="text-4xl text-center text-primary my-7 font-bold animate-bounce">All Toys</h1>
       <table className="table w-full">

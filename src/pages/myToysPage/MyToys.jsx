@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../components/provider/AuthProvider";
 import SingleMyToy from "./SingleMyToy";
 import Swal from "sweetalert2";
 import { notifyWithTitle } from "../../shared/alert";
+import NoData from "../../shared/NoData";
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
@@ -26,7 +26,6 @@ const MyToys = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data.acknowledged) {
               notifyWithTitle("Deleted!", "Your toy has been deleted.");
 
@@ -45,7 +44,9 @@ const MyToys = () => {
         setCount(data.length);
       });
   }, [count]);
-  return (
+  return toys?.length === 0 ? (
+    <NoData></NoData>
+  ) : (
     <div className="w-[90%] mx-auto my-8 font-serif">
       <h1 className="text-4xl text-center text-primary my-7 font-bold animate-bounce">My Toys</h1>
       <table className="table w-full">

@@ -34,9 +34,7 @@ const Register = () => {
     register(email, password)
       .then(() => {
         updateUser(name, imgurl)
-          .then(() => {
-            console.log("User Updated");
-          })
+          .then(() => {})
           .catch((error) => {
             const errorMessage = error.message;
             notifyError(errorMessage);

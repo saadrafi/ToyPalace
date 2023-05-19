@@ -21,16 +21,7 @@ const UpdateToy = () => {
     const image = form.toyimage.value;
     const rating = form.rating.value;
     // validate form
-    if (
-      !name ||
-      !price ||
-      !quantity ||
-      !description ||
-      !image ||
-      !rating ||
-      !sellerName ||
-      !sellerEmail
-    ) {
+    if (!name || !price || !quantity || !description || !image || !rating) {
       notifyRequired("fill up all form");
       return;
     } else if (!subCategory) {
@@ -76,13 +67,11 @@ const UpdateToy = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data.acknowledged) {
               notifyWithTitle("Updated!", "Data updated successfully");
             }
           })
           .catch((err) => {
-            console.log(err);
             notifyError(err.message);
           });
       }

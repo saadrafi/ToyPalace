@@ -39,7 +39,6 @@ const Login = () => {
   const handleGoogleLogin = () => {
     loginWithProvider(googleProvider)
       .then(() => {
-        console.log("Login with google");
       })
       .catch((error) => {
         const errorMessage = error.message;

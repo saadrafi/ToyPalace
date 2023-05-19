@@ -7,8 +7,7 @@ import "@smastrom/react-rating/style.css";
 
 const ToyDetails = () => {
   const toy = useLoaderData();
-  const [seeMore, setSeeMore] = useState(false);
-  console.log(toy);
+  const [seeMore, setSeeMore] = useState(toy.description.length>200?false:true);
   return (
     <div>
       <DetailsBanner></DetailsBanner>
@@ -35,7 +34,7 @@ const ToyDetails = () => {
               <span>
                 {seeMore ? toy.description : toy.description.slice(0, 200) + "..."}
                 <button className="text-primary underline" onClick={() => setSeeMore(!seeMore)}>
-                  {seeMore ? "see less" : "see more"}
+                  {seeMore ? "" : "see more"}
                 </button>
               </span>
             </p>
