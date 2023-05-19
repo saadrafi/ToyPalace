@@ -47,6 +47,12 @@ const AddToy = () => {
     } else if (rating > 5) {
       notifyRequired("rating must be equal or less than 5");
       return;
+    } else if (price < 0) {
+      notifyRequired("price must be equal or greater than 0");
+      return;
+    } else if (quantity < 0) {
+      notifyRequired("quantity must be equal or greater than 0");
+      return;
     }
 
     const toydata = {
