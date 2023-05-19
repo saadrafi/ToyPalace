@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SingleToyRow from "./SingleToyRow";
+import { useLoaderData } from "react-router-dom";
 
 const AllToys = () => {
-  const [toyData, setToyData] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/alltoys")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setToyData(data);
-      });
-  }, []);
+  const toyData = useLoaderData();
 
   return (
     <div className="w-[90%] mx-auto my-8 font-serif">
