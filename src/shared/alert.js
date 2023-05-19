@@ -17,6 +17,15 @@ const notifySuccess = (message) => {
     timer: 1800,
   });
 };
+const notifyWithTitle =(title,message)=>{
+  Swal.fire({
+    icon: "success",
+    title: title,
+    text: message,
+    showConfirmButton: false,
+    timer: 1800,
+  });
+}
 const notifyError = (error) => {
   Swal.fire({
     icon: "error",
@@ -25,4 +34,4 @@ const notifyError = (error) => {
   });
 };
 
-export { notifyRequired, notifySuccess, notifyError };
+export { notifyRequired, notifySuccess, notifyError,notifyWithTitle };

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SingleToyRow = ({ toy, index }) => {
-  const {_id, name, price, quantity, sellerName, subCategory } = toy;
+  const { _id, name, price, quantity, sellerName, subCategory } = toy;
   return (
     <tr>
       <th>{index}</th>
@@ -13,8 +13,8 @@ const SingleToyRow = ({ toy, index }) => {
       </td>
       <td>{name}</td>
       <td>{subCategory.toUpperCase()}</td>
-      <td>{price}</td>
-      <td>${quantity}</td>
+      <td>${price}</td>
+      <td>{quantity}</td>
       <th>
         <Link to={`/toy/${_id}`}>
           <button className="btn btn-primary btn-xs">details</button>
