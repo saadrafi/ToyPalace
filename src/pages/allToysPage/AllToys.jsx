@@ -1,37 +1,62 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SingleToyRow from "./SingleToyRow";
 import { useLoaderData } from "react-router-dom";
 import NoData from "../../shared/NoData";
+import { data } from "autoprefixer";
 
 const AllToys = () => {
-  const toyData = useLoaderData();
+  const [toyData, setToyData] = useState(useLoaderData());
+  const [searchText, setSearchText] = useState("");
 
-  return toyData?.length === 0 ? (
-    <NoData></NoData>
-  ) : (
+  const handleSearch = () => {
+    fetch(`http://localhost:5000/alltoys?search=${searchText}`)
+      .then((res) => res.json())
+      .then((data) => setToyData(data));
+  };
+
+  return (
     <div className="w-[90%] mx-auto my-8 font-serif">
       <h1 className="text-4xl text-center text-primary my-7 font-bold animate-bounce">All Toys</h1>
-      <table className="table w-full">
-        {/* head */}
-        <thead>
-          <tr>
-            <th></th>
-            <th>Seller</th>
-            <th>Toy</th>
-            <th>Sub-Category</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th></th>
-          </tr>
-        </thead>
+      <div className=" flex justify-center my-7 gap-3">
+        <input
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered input-primary w-full max-w-xs"
+        />
 
-        {/* body */}
-        <tbody>
-          {toyData.map((toy, index) => (
-            <SingleToyRow toy={toy} key={toy._id} index={index + 1}></SingleToyRow>
-          ))}
-        </tbody>
-      </table>
+        <button onClick={handleSearch} className="btn btn-outline btn-primary">
+          Search
+        </button>
+      </div>
+      {toyData?.length === 0 ? (
+        <NoData></NoData>
+      ) : (
+        <table className="table w-full">
+          {/* head */}
+          <thead>
+            <tr>
+              <th></th>
+              <th>Seller</th>
+              <th>Toy</th>
+              <th>Sub-Category</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          {/* body */}
+
+          <tbody>
+            {toyData.map((toy, index) => (
+              <SingleToyRow toy={toy} key={toy._id} index={index + 1}></SingleToyRow>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
