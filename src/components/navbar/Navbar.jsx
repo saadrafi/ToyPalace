@@ -130,17 +130,19 @@ const Navbar = () => {
           </div>
           {/* navEnd */}
           <div className="flex items-center gap-2">
-            <div className=" md:h-11 md:w-11 h-6 tooltip" data-tip={user?.displayName}>
-              {user?.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  alt=""
-                  className="rounded-full h-full w-full object-cover"
-                />
-              ) : (
-                <FaUser className="h-full w-full" />
-              )}
-            </div>
+            {user && (
+              <div className=" md:h-11 md:w-11 h-6 tooltip" data-tip={user?.displayName}>
+                {user?.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt=""
+                    className="rounded-full h-full w-full object-cover"
+                  />
+                ) : (
+                  <FaUser className="h-full w-full" />
+                )}
+              </div>
+            )}
             {user ? (
               <Link onClick={logout} className="btn btn-primary">
                 Log out

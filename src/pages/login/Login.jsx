@@ -8,11 +8,11 @@ import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, loginWithProvider } = useContext(AuthContext);
+  const { login, loginWithProvider, setLoading } = useContext(AuthContext);
 
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -30,11 +30,12 @@ const Login = () => {
     login(email, password)
       .then(() => {
         form.reset();
-        notifyWithTitle("Sign In","Successful")
+        notifyWithTitle("Sign In", "Successful");
         navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
+        setLoading(false);
 
         notifyError(errorMessage);
       });
@@ -45,7 +46,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     loginWithProvider(googleProvider)
       .then(() => {
-        notifyWithTitle("Sign In","Successful")
+        notifyWithTitle("Sign In", "Successful");
         navigate(from, { replace: true });
       })
       .catch((error) => {

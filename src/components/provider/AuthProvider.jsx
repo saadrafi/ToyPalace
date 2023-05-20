@@ -8,6 +8,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import app from "../../firebase/firebase.config";
+import Spinner from "../../shared/Spinner";
 
 export const AuthContext = createContext(null);
 
@@ -54,8 +55,13 @@ const AuthProvider = ({ children }) => {
     loginWithProvider,
     logout,
     loading,
+    setLoading,
   };
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return loading ? (
+    <Spinner></Spinner>
+  ) : (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

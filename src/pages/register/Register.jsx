@@ -8,7 +8,7 @@ import { notifyError, notifyRequired, notifyWithTitle } from "../../shared/alert
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { register, updateUser } = useContext(AuthContext);
+  const { register, updateUser, setLoading } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,19 +38,20 @@ const Register = () => {
     register(email, password)
       .then(() => {
         updateUser(name, imgurl)
-          .then(() => {})
+          .then(() => {
+            form.reset();
+            notifyWithTitle("Sign Up", "Successful");
+            navigate(from, { replace: true });
+          })
           .catch((error) => {
             const errorMessage = error.message;
             notifyError(errorMessage);
           });
-
-        form.reset();
-        notifyWithTitle("Sign Up", "Successful");
-        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
         notifyError(errorMessage);
+        setLoading(false);
       });
   };
   return (
