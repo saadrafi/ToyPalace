@@ -22,8 +22,8 @@ const AddToy = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const price = form.price.value;
-    const quantity = form.quantity.value;
+    const price = parseFloat(form.price.value);
+    const quantity = parseInt( form.quantity.value);
     const description = form.description.value;
     const subCategory = selectSubCategory.value;
     const image = form.toyimage.value;
@@ -66,6 +66,7 @@ const AddToy = () => {
       sellerName,
       sellerEmail,
     };
+    console.log(toydata);
 
     fetch("http://localhost:5000/addtoy", {
       method: "POST",
