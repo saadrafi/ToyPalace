@@ -5,12 +5,14 @@ import Swal from "sweetalert2";
 import { notifyWithTitle } from "../../shared/alert";
 import NoData from "../../shared/NoData";
 import Select from "react-select";
+import Spinner from "../../shared/Spinner";
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [toys, setToys] = useState([]);
   const [count, setCount] = useState(0);
   const [selected, setSelected] = useState("none");
+  const [loader, setLoader] = useState(true);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -49,9 +51,13 @@ const MyToys = () => {
       .then((data) => {
         setToys(data);
         setCount(data.length);
+        setLoader(false);
       });
   }, [count, selected]);
-  return toys?.length === 0 ? (
+
+  return loader ? (
+    <Spinner></Spinner>
+  ) : toys?.length === 0 ? (
     <NoData></NoData>
   ) : (
     <div className="w-[90%] mx-auto my-8 font-serif">
