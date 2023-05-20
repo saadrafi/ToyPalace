@@ -1,14 +1,18 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdAlternateEmail, MdPerson, MdImage } from "react-icons/md";
 import { AuthContext } from "../../components/provider/AuthProvider";
 import Swal from "sweetalert2";
-import { notifyError, notifyRequired } from "../../shared/alert";
+import { notifyError, notifyRequired, notifyWithTitle } from "../../shared/alert";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { register, updateUser } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from || "/";
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -41,6 +45,8 @@ const Register = () => {
           });
 
         form.reset();
+        notifyWithTitle("Sign Up", "Successful");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;

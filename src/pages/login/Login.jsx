@@ -1,14 +1,18 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { AuthContext } from "../../components/provider/AuthProvider";
-import { notifyError, notifyRequired } from "../../shared/alert";
+import { notifyError, notifyRequired, notifyWithTitle } from "../../shared/alert";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { login, loginWithProvider } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -26,6 +30,8 @@ const Login = () => {
     login(email, password)
       .then(() => {
         form.reset();
+        notifyWithTitle("Sign In","Successful")
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -39,6 +45,8 @@ const Login = () => {
   const handleGoogleLogin = () => {
     loginWithProvider(googleProvider)
       .then(() => {
+        notifyWithTitle("Sign In","Successful")
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -102,7 +110,7 @@ const Login = () => {
 
             <p className="text-center text-sm text-gray-500">
               No account?
-              <Link to="/register" className="underline btn-link">
+              <Link state={{ from: from }} to="/register" className="underline btn-link">
                 Sign up
               </Link>
             </p>

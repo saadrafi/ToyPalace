@@ -31,10 +31,10 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const loginWithProvider = (provider)=>{
+  const loginWithProvider = (provider) => {
     setLoading(true);
     return signInWithPopup(auth, provider);
-  }
+  };
   const logout = () => {
     return auth.signOut();
   };
@@ -53,6 +53,7 @@ const AuthProvider = ({ children }) => {
     updateUser,
     loginWithProvider,
     logout,
+    loading,
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
