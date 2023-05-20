@@ -23,7 +23,7 @@ const AddToy = () => {
     const form = e.target;
     const name = form.name.value;
     const price = parseFloat(form.price.value);
-    const quantity = parseInt( form.quantity.value);
+    const quantity = parseInt(form.quantity.value);
     const description = form.description.value;
     const subCategory = selectSubCategory.value;
     const image = form.toyimage.value;
@@ -112,6 +112,7 @@ const AddToy = () => {
             <label className="text-lg text-yellow-700">price:</label>
             <div className="relative">
               <input
+                step="0.01"
                 type="number"
                 name="price"
                 className="w-full rounded-lg border input-primary p-2 pe-12 text-sm shadow-sm"
