@@ -4,11 +4,13 @@ import SingleMyToy from "./SingleMyToy";
 import Swal from "sweetalert2";
 import { notifyWithTitle } from "../../shared/alert";
 import NoData from "../../shared/NoData";
+import Select from "react-select";
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [toys, setToys] = useState([]);
   const [count, setCount] = useState(0);
+  const [selected, setSelected] = useState("none");
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -36,19 +38,33 @@ const MyToys = () => {
     });
   };
 
+  const handleSort = (e) => {
+    const value = e.target.value;
+    setSelected(value);
+  };
+
   useEffect(() => {
-    fetch(`http://localhost:5000/mytoys?email=${user.email}`)
+    fetch(`http://localhost:5000/mytoys?email=${user.email}&&sort=${selected}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
         setCount(data.length);
       });
-  }, [count]);
+  }, [count, selected]);
   return toys?.length === 0 ? (
     <NoData></NoData>
   ) : (
     <div className="w-[90%] mx-auto my-8 font-serif">
       <h1 className="text-4xl text-center text-primary my-7 font-bold animate-bounce">My Toys</h1>
+      <div className="w-40 ml-auto my-3">
+        <select className="select select-primary w-full max-w-xs" onChange={handleSort}>
+          <option disabled selected>
+            Sort By Price
+          </option>
+          <option>High</option>
+          <option>Low</option>
+        </select>
+      </div>
       <table className="table w-full">
         {/* head */}
         <thead>
