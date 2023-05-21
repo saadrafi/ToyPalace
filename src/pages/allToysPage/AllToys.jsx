@@ -7,8 +7,18 @@ import setTitle from "../../titleHook/TitleHook";
 
 const AllToys = () => {
   setTitle("All Toys");
-  const [toyData, setToyData] = useState(useLoaderData());
+  const [toyData, setToyData] = useState();
+  const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    fetch("https://legoserver-saadrafi.vercel.app/alltoys")
+      .then((res) => res.json())
+      .then((data) => {
+        setToyData(data);
+        setLoading(false);
+      });
+  }, []);
 
   const handleSearch = () => {
     fetch(`https://legoserver-saadrafi.vercel.app/alltoys?search=${searchText}`)
@@ -18,7 +28,11 @@ const AllToys = () => {
 
   return (
     <div className="w-[90%] mx-auto my-8 font-serif">
-      <h1 className="text-4xl text-center text-primary my-7 font-bold animate-bounce">All Toys</h1>
+      <div>
+        <h1 className="text-4xl text-center text-primary my-7 font-bold animate-bounce">
+          All Toys
+        </h1>
+      </div>
       <div className=" flex justify-center my-7 gap-3">
         <input
           onChange={(e) => {
@@ -35,6 +49,10 @@ const AllToys = () => {
       </div>
       {toyData?.length === 0 ? (
         <NoData></NoData>
+      ) : loading ? (
+        <div className="flex justify-center items-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+        </div>
       ) : (
         <table className="table w-full">
           {/* head */}

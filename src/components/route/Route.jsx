@@ -41,7 +41,6 @@ const router = createBrowserRouter([
       {
         path: "/alltoys",
         element: <AllToys></AllToys>,
-        loader: () => fetch("https://legoserver-saadrafi.vercel.app/alltoys"),
       },
       {
         path: "/toy/:id",

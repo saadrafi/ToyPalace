@@ -41,8 +41,8 @@ const Register = () => {
       .then(() => {
         updateUser(name, imgurl)
           .then(() => {
-            form.reset();
             notifyWithTitle("Sign Up", "Successful");
+            form.reset();
             navigate(from, { replace: true });
           })
           .catch((error) => {
