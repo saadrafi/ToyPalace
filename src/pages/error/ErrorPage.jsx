@@ -1,12 +1,14 @@
 import React from "react";
 import logo from "../../assets/errorLogo.jpg";
 import { Link } from "react-router-dom";
+import setTitle from "../../titleHook/TitleHook";
 
 const ErrorPage = () => {
+  setTitle("Error")
   return (
     <div className="w-[90%] mx-auto h-screen flex justify-center items-center gap-6">
       <div>
-        <img src={logo} alt="" className="h-1/2" />
+        <img src={logo} alt="banner" className="h-1/2" />
       </div>
       <div className=" font-serif space-y-6">
         <h1 className="text-6xl font-extrabold w-2/3">OOPS!! PAGE NOT FOUND</h1>

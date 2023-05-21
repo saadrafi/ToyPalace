@@ -6,8 +6,10 @@ import { notifyWithTitle } from "../../shared/alert";
 import NoData from "../../shared/NoData";
 import Select from "react-select";
 import Spinner from "../../shared/Spinner";
+import setTitle from "../../titleHook/TitleHook";
 
 const MyToys = () => {
+  setTitle("My Toys");
   const { user } = useContext(AuthContext);
   const [toys, setToys] = useState([]);
   const [count, setCount] = useState(0);
@@ -25,7 +27,7 @@ const MyToys = () => {
       confirmButtonText: "Yes, Delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deletetoy/${id}`, {
+        fetch(`https://legoserver-saadrafi.vercel.app/deletetoy/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -46,7 +48,7 @@ const MyToys = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/mytoys?email=${user.email}&&sort=${selected}`)
+    fetch(`https://legoserver-saadrafi.vercel.app/mytoys?email=${user.email}&&sort=${selected}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);

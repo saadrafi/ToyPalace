@@ -6,25 +6,27 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Testimonial from "./Testimonials";
 import BlogSection from "./blogsection/BlogSection";
+import setTitle from "../../titleHook/TitleHook";
 // ..
 AOS.init();
 
 const Home = () => {
+  setTitle("Home");
   return (
     <div>
       <div data-aos="fade-in">
         <Banner></Banner>
       </div>
-      <div data-aos="zoom-in" data-aos-duration="2000">
+      <div data-aos="zoom-in" data-aos-duration="3000">
         <Galllery></Galllery>
       </div>
-      <div data-aos="fade-right">
+      <div data-aos="fade-right" data-aos-duration="2000">
         <CategoryTabs></CategoryTabs>
       </div>
-      <div data-aos="fade-left" data-aos-duration="1500">
+      <div data-aos="fade-left" data-aos-duration="2000">
         <Testimonial></Testimonial>
       </div>
-      <div data-aos="fade-out" data-aos-duration="1500">
+      <div data-aos="flip-right" data-aos-duration="2000">
         <BlogSection></BlogSection>
       </div>
     </div>

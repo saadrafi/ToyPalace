@@ -3,13 +3,15 @@ import SingleToyRow from "./SingleToyRow";
 import { useLoaderData } from "react-router-dom";
 import NoData from "../../shared/NoData";
 import { data } from "autoprefixer";
+import setTitle from "../../titleHook/TitleHook";
 
 const AllToys = () => {
+  setTitle("All Toys");
   const [toyData, setToyData] = useState(useLoaderData());
   const [searchText, setSearchText] = useState("");
 
   const handleSearch = () => {
-    fetch(`http://localhost:5000/alltoys?search=${searchText}`)
+    fetch(`https://legoserver-saadrafi.vercel.app/alltoys?search=${searchText}`)
       .then((res) => res.json())
       .then((data) => setToyData(data));
   };

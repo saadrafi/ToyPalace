@@ -1,6 +1,8 @@
 import React from "react";
+import setTitle from "../../titleHook/TitleHook";
 
 const BlogPage = () => {
+  setTitle("Blogs")
   return (
     <div className=" w-[90%] mx-auto ">
       <h1 className="text-center text-5xl font-bold my-4">Blogs</h1>

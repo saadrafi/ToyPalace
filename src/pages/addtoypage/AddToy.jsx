@@ -6,6 +6,7 @@ import { FaDollarSign } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { options } from "./menuOption";
 import { AuthContext } from "../../components/provider/AuthProvider";
+import setTitle from "../../titleHook/TitleHook";
 
 // https://i.ibb.co/nfLr4cC/60374-alt1.png fire truck
 // https://i.ibb.co/rbfkT7x/10696.jpg brick
@@ -17,6 +18,7 @@ import { AuthContext } from "../../components/provider/AuthProvider";
 const AddToy = () => {
   const [selectSubCategory, setSubCategory] = useState("");
   const { user } = useContext(AuthContext);
+  setTitle("Add Toy");
 
   const addToyData = (e) => {
     e.preventDefault();
@@ -66,9 +68,8 @@ const AddToy = () => {
       sellerName,
       sellerEmail,
     };
-    console.log(toydata);
 
-    fetch("http://localhost:5000/addtoy", {
+    fetch("https://legoserver-saadrafi.vercel.app/addtoy", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +164,6 @@ const AddToy = () => {
             <input
               type="url"
               name="toyimage"
-              defaultValue="https://i.ibb.co/8MFzHSy/60316.png"
               className="w-full rounded-lg border input-primary p-2 pe-12 text-sm shadow-sm"
               placeholder="image url"
             />
@@ -185,11 +185,13 @@ const AddToy = () => {
               type="text"
               name="sellername"
               className="w-full rounded-lg border input-primary p-2 pe-12 text-sm shadow-sm"
+              disabled
             />
           </div>
           <div className=" space-y-1">
             <label className="text-lg text-yellow-700">seller-email:</label>
             <input
+              disabled
               value={user?.email}
               type="text"
               name="selleremail"

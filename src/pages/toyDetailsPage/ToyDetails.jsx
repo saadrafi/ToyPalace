@@ -4,17 +4,19 @@ import DetailsBanner from "./DetailsBanner";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
+import setTitle from "../../titleHook/TitleHook";
 
 const ToyDetails = () => {
   const toy = useLoaderData();
-  const [seeMore, setSeeMore] = useState(toy.description.length>200?false:true);
+  setTitle("Details");
+  const [seeMore, setSeeMore] = useState(toy.description.length > 200 ? false : true);
   return (
     <div>
       <DetailsBanner></DetailsBanner>
       <div className="w-[90%] mx-auto my-8 ">
         <div className="flex justify-between gap-4 items-start font-mono">
           <div className="w-1/2">
-            <img className="w-full" src={toy.image} alt="" />
+            <img className="w-full" src={toy.image} alt="toyImage" />
           </div>
           <div className="w-1/2 my-auto space-y-4">
             <h1 className="text-4xl ">{toy.name}</h1>

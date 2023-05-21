@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { FaDollarSign } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 import { options } from "../addtoypage/menuOption";
 import { notifyError, notifyRequired, notifySuccess, notifyWithTitle } from "../../shared/alert";
 import Swal from "sweetalert2";
+import setTitle from "../../titleHook/TitleHook";
 
 const UpdateToy = () => {
   const toy = useLoaderData();
   const [selectSubCategory, setSubCategory] = useState(toy.subCategory);
+  setTitle("Update");
+  const navigate = useNavigate();
 
   const updateToyData = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const price = form.price.value;
-    const quantity = form.quantity.value;
+    const price = parseFloat(form.price.value);
+    const quantity = parseInt(form.quantity.value);
     const description = form.description.value;
     const subCategory = selectSubCategory.value;
     const image = form.toyimage.value;
@@ -58,7 +61,7 @@ const UpdateToy = () => {
       confirmButtonText: "Yes, update it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/updatetoy/${toy._id}`, {
+        fetch(`https://legoserver-saadrafi.vercel.app/updatetoy/${toy._id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -69,6 +72,7 @@ const UpdateToy = () => {
           .then((data) => {
             if (data.acknowledged) {
               notifyWithTitle("Updated!", "Data updated successfully");
+              navigate(-1);
             }
           })
           .catch((err) => {
@@ -97,6 +101,7 @@ const UpdateToy = () => {
             <label className="text-lg text-yellow-700">price:</label>
             <div className="relative">
               <input
+                step="0.01"
                 type="number"
                 name="price"
                 defaultValue={toy.price}
@@ -169,6 +174,7 @@ const UpdateToy = () => {
           <div className=" space-y-1">
             <label className="text-lg text-yellow-700">seller-name:</label>
             <input
+              disabled
               value={toy.sellerName}
               type="text"
               name="sellername"
@@ -178,6 +184,7 @@ const UpdateToy = () => {
           <div className=" space-y-1">
             <label className="text-lg text-yellow-700">seller-email:</label>
             <input
+              disabled
               value={toy.sellerEmail}
               type="text"
               name="selleremail"

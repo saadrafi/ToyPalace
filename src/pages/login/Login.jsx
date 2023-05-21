@@ -5,8 +5,10 @@ import { MdAlternateEmail } from "react-icons/md";
 import { AuthContext } from "../../components/provider/AuthProvider";
 import { notifyError, notifyRequired, notifyWithTitle } from "../../shared/alert";
 import { GoogleAuthProvider } from "firebase/auth";
+import setTitle from "../../titleHook/TitleHook";
 
 const Login = () => {
+  setTitle("Login");
   const [showPassword, setShowPassword] = useState(false);
   const { login, loginWithProvider, setLoading } = useContext(AuthContext);
 
@@ -47,12 +49,14 @@ const Login = () => {
     loginWithProvider(googleProvider)
       .then(() => {
         notifyWithTitle("Sign In", "Successful");
+
         navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
         notifyError(errorMessage);
       });
+    setLoading(false);
   };
 
   return (

@@ -5,8 +5,10 @@ import { MdAlternateEmail, MdPerson, MdImage } from "react-icons/md";
 import { AuthContext } from "../../components/provider/AuthProvider";
 import Swal from "sweetalert2";
 import { notifyError, notifyRequired, notifyWithTitle } from "../../shared/alert";
+import setTitle from "../../titleHook/TitleHook";
 
 const Register = () => {
+  setTitle("Sign Up");
   const [showPassword, setShowPassword] = useState(false);
   const { register, updateUser, setLoading } = useContext(AuthContext);
 
