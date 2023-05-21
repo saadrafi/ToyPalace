@@ -9,7 +9,7 @@ const Footer = () => {
       <footer className="flex flex-col py-10 bg-base-200 text-base-content">
         <footer className="footer w-[90%] mx-auto ">
           <div>
-            <img src={logo} alt="" />
+            <img src={logo} alt="logo" />
             <p>
               <span className="text-2xl font-bold">Lego</span>
               <span className="text-2xl font-extrabold text-primary">Palace</span>
