@@ -6,10 +6,12 @@ import { options } from "../addtoypage/menuOption";
 import { notifyError, notifyRequired, notifySuccess, notifyWithTitle } from "../../shared/alert";
 import Swal from "sweetalert2";
 import setTitle from "../../titleHook/TitleHook";
+import Spinner from "../../shared/Spinner";
 
 const UpdateToy = () => {
   const toy = useLoaderData();
   const [selectSubCategory, setSubCategory] = useState(toy.subCategory);
+  const [loading, setLoading] = useState(false);
   setTitle("Update");
   const navigate = useNavigate();
 
@@ -61,6 +63,7 @@ const UpdateToy = () => {
       confirmButtonText: "Yes, update it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
         fetch(`https://legoserver-saadrafi.vercel.app/updatetoy/${toy._id}`, {
           method: "PUT",
           headers: {
@@ -72,17 +75,21 @@ const UpdateToy = () => {
           .then((data) => {
             if (data.acknowledged) {
               notifyWithTitle("Updated!", "Data updated successfully");
+              setLoading(false);
               navigate(-1);
             }
           })
           .catch((err) => {
+            setLoading(false);
             notifyError(err.message);
           });
       }
     });
   };
 
-  return (
+  return loading ? (
+    <Spinner></Spinner>
+  ) : (
     <div className="w-[90%] mx-auto">
       <h1 className="text-4xl underline text-center text-primary my-5 font-bold">Update TOY</h1>
       <form onSubmit={updateToyData}>

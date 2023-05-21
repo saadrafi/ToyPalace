@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const updateUser = (name, photo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -45,7 +46,9 @@ const AuthProvider = ({ children }) => {
       setUser(user);
       setLoading(false);
     });
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
   const authInfo = {
     user,

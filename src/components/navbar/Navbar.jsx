@@ -142,7 +142,10 @@ const Navbar = () => {
           {/* navEnd */}
           <div className="flex items-center gap-2">
             {user && (
-              <div className=" md:h-11 md:w-11 h-6 tooltip" data-tip={user?.displayName}>
+              <div
+                className=" md:h-11 md:w-11 h-6 tooltip tooltip-bottom"
+                data-tip={user?.displayName ? user.displayName : null}
+              >
                 {user?.photoURL ? (
                   <img
                     src={user.photoURL}

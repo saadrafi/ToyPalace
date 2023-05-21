@@ -27,12 +27,14 @@ const MyToys = () => {
       confirmButtonText: "Yes, Delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoader(true);
         fetch(`https://legoserver-saadrafi.vercel.app/deletetoy/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.acknowledged) {
+              setLoader(false);
               notifyWithTitle("Deleted!", "Your toy has been deleted.");
 
               setCount(count - 1);

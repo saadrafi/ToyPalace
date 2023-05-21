@@ -41,12 +41,14 @@ const Register = () => {
       .then(() => {
         updateUser(name, imgurl)
           .then(() => {
+            setLoading(false);
             notifyWithTitle("Sign Up", "Successful");
             form.reset();
             navigate(from, { replace: true });
           })
           .catch((error) => {
             const errorMessage = error.message;
+            setLoading(false);
             notifyError(errorMessage);
           });
       })

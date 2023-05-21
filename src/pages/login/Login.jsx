@@ -31,8 +31,10 @@ const Login = () => {
 
     login(email, password)
       .then(() => {
-        form.reset();
+        setLoading(false);
         notifyWithTitle("Sign In", "Successful");
+        form.reset();
+
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -49,14 +51,14 @@ const Login = () => {
     loginWithProvider(googleProvider)
       .then(() => {
         notifyWithTitle("Sign In", "Successful");
-
+        setLoading(false);
         navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
+        setLoading(false);
         notifyError(errorMessage);
       });
-    setLoading(false);
   };
 
   return (
