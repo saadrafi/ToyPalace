@@ -33,7 +33,7 @@ const Banner = () => {
               </button>
             </div>
             <div className="h-96  lg:w-1/2">
-              <img src={banner1} alt="" className="h-full w-full" />
+              <img src={banner1} alt="banner" className="h-full w-full" />
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@ const Banner = () => {
               <button className="text-2xl md:w-1/2 font-bold btn-primary btn">sell now</button>
             </div>
             <div className=" h-96  lg:w-1/2">
-              <img src={banner2} alt="" className="h-full w-full" />
+              <img src={banner2} alt="banner" className="h-full w-full" />
             </div>
           </div>
         </div>

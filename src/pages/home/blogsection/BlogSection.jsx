@@ -5,7 +5,7 @@ const BlogSection = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://legoserver-saadrafi.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);

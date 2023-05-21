@@ -9,11 +9,15 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 
 const Testimonial = () => {
   const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/testimony")
+    fetch("https://legoserver-saadrafi.vercel.app/testimony")
       .then((res) => res.json())
-      .then((data) => setTestimonials(data));
+      .then((data) => {
+        setTestimonials(data);
+        setLoading(false);
+      });
   }, []);
   return (
     <div>
@@ -26,7 +30,8 @@ const Testimonial = () => {
                 are saying.
               </h1>
               <h3 className="text-xl mb-5 font-light">
-                Don't take our word <br />Take theirs..
+                Don't take our word <br />
+                Take theirs..
               </h3>
               <div className="text-center mb-10">
                 <span className="inline-block w-1 h-1 rounded-full bg-primary ml-1"></span>
@@ -36,41 +41,47 @@ const Testimonial = () => {
                 <span className="inline-block w-1 h-1 rounded-full bg-primary ml-1"></span>
               </div>
             </div>
-            <div className="-mx-3  items-start">
-              <Swiper
-                slidesPerView={1}
-                spaceBetween={5}
-                autoplay={{
-                  delay: 1500,
-                  disableOnInteraction: false,
-                }}
-                pagination={{
-                  clickable: true,
-                }}
-                breakpoints={{
-                  640: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                  },
-                  768: {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                  },
-                }}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
-              >
-                {testimonials.map((testimony) => (
-                  <SwiperSlide key={testimony._id}>
-                    <Testimony data={testimony} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+              </div>
+            ) : (
+              <div className="-mx-3  items-start">
+                <Swiper
+                  slidesPerView={1}
+                  spaceBetween={5}
+                  autoplay={{
+                    delay: 1500,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                    },
+                    768: {
+                      slidesPerView: 3,
+                      spaceBetween: 20,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 20,
+                    },
+                  }}
+                  modules={[Autoplay, Pagination, Navigation]}
+                  className="mySwiper"
+                >
+                  {testimonials.map((testimony) => (
+                    <SwiperSlide key={testimony._id}>
+                      <Testimony data={testimony} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            )}
           </div>
         </div>
       </div>

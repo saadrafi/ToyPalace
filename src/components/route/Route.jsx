@@ -32,12 +32,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/addtoy",
-        element: <AddToy></AddToy>,
+        element: (
+          <PrivateRoute>
+            <AddToy></AddToy>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/alltoys",
         element: <AllToys></AllToys>,
-        loader: () => fetch("http://localhost:5000/alltoys"),
+        loader: () => fetch("https://legoserver-saadrafi.vercel.app/alltoys"),
       },
       {
         path: "/toy/:id",
@@ -46,7 +50,7 @@ const router = createBrowserRouter([
             <ToyDetails></ToyDetails>
           </PrivateRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/toy/${params.id}`),
+        loader: ({ params }) => fetch(`https://legoserver-saadrafi.vercel.app/toy/${params.id}`),
       },
       {
         path: "/mytoys",
@@ -59,7 +63,7 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <UpdateToy></UpdateToy>,
-        loader: ({ params }) => fetch(`http://localhost:5000/toy/${params.id}`),
+        loader: ({ params }) => fetch(`https://legoserver-saadrafi.vercel.app/toy/${params.id}`),
       },
       {
         path: "/blogs",

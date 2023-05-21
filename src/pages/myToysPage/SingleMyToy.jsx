@@ -26,7 +26,7 @@ const SingleMyToy = ({ toy, index, handleDelete }) => {
 
       <td>
         <div className="flex flex-col items-center">
-          <div className="text-sm text-gray-500">{description.slice(0, 50)}</div>
+          <div className="text-sm text-gray-500">{description.slice(0, 30)}</div>
           <Link to={`/toy/${_id}`}>
             <button className="btn btn-link btn-xs">read more</button>
           </Link>

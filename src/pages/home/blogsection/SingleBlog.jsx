@@ -5,7 +5,7 @@ const SingleBlog = ({ blog }) => {
   return (
     <div>
       <div className=" h-44">
-        <img src={blog.image} className="h-full w-full" alt="" />
+        <img src={blog.image} className="h-full w-full" alt="img" />
       </div>
       <div className="p-3 space-y-4">
         <h1 className="text-xl text-center font-semibold">{blog.title}</h1>
