@@ -1,13 +1,14 @@
-
 # Lego Palace
 
 explore about lego
 
+## Server Link
+
+https://github.com/saadrafi/ToyPalaceServer.git
 
 ## Live Link
 
 https://legopalace-6dfc9.web.app/
-
 
 ## Features
 
@@ -18,5 +19,3 @@ https://legopalace-6dfc9.web.app/
 - Blog section
 - Dynamic data loading
 - Animation on scroll
-
-
